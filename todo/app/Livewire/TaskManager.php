@@ -3,14 +3,14 @@
 namespace App\Livewire;
 
 use Livewire\Component;
-use App\Models\Task;
+use App\Models\Task; 
+use Illuminate\Support\Facades\Session; 
+
 
 class TaskManager extends Component
 {
-    public $title= '';
+    public $title = '';
     public $tasks;
-
-
 
     protected $rules = [
         'title' => 'required|max:255|string',
@@ -28,17 +28,15 @@ class TaskManager extends Component
         $this->title = '';
         $this->tasks = Task::all();
 
-        Session()->flash('message', 'Task added successfully.');
+        Session::flash('message', 'Task added successfully.');
     }
 
     public function deleteTask($taskId)
     {
-       Task::findOrFail($taskId)->delete();
-       $this->tasks = Task::all();
-       Session()->flash('message', 'Task deleted successfully.');
-        }
-    
-
+        Task::findOrFail($taskId)->delete();
+        $this->tasks = Task::all();
+        Session::flash('message', 'Task deleted successfully.');
+    }
 
     public function render()
     {

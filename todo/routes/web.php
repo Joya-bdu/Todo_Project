@@ -2,11 +2,24 @@
 
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
-use App\Livewire\TaskManager;
+use App\Livewire\TaskController;
+use App\Http\Livewire\TaskManager;
 
-Route::get('/', function () {
-    return view('welcome');
+
+
+
+Route::view('/', 'welcome');
+
+Route::view('dashboard', 'dashboard')
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
+
+Route::view('profile', 'profile')
+    ->middleware(['auth'])
+    ->name('profile');
+
+
+Route::get('/tasks', function () {
+    return view('tasks');
 });
-
-
-Route::get('/tasks', TaskManager::class)->name('tasks.index');
+require __DIR__.'/auth.php';
