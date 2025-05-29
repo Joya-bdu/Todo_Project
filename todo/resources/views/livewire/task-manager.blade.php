@@ -16,4 +16,7 @@
         @error('title') <span class="text-red-500">{{ $message }}</span> @enderror
         <button type="submit" class="bg-blue-500 text-white p-2 mt-2">Add Task</button>
     </form>
+
+    @livewire('counter')
+    @livewire("user-profile", ['userName' => 'John Doe', 'userId' => 123])
 </div>
