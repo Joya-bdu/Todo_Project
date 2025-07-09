@@ -16,13 +16,17 @@ state([
     'name' => '',
     'email' => '',
     'password' => '',
-    'password_confirmation' => ''
+    'password_confirmation' => '',
+    'phone' => '',
+    'address' => '',
 ]);
 
 rules([
     'name' => ['required', 'string', 'max:255'],
     'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
     'password' => ['required', 'string', 'confirmed', Rules\Password::defaults()],
+    'phone' => ['nullable', 'string', 'max:20'],
+    'address' => ['nullable', 'string', 'max:255'],
 ]);
 
 $register = function () {
@@ -76,6 +80,18 @@ $register = function () {
                             name="password_confirmation" required autocomplete="new-password" />
 
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+        </div>
+        <!-- Phone -->
+        <div class="mt-4">
+            <x-input-label for="phone" :value="__('Phone')" />
+            <x-text-input wire:model="phone" id="phone" class="block mt-1 w-full" type="text" name="phone" />
+            <x-input-error :messages="$errors->get('phone')" class="mt-2" />
+        </div>
+        <!-- Address -->
+        <div class="mt-4">
+            <x-input-label for="address" :value="__('Address')" />
+            <x-text-input wire:model="address" id="address" class="block mt-1 w-full" type="text" name="address" />
+            <x-input-error :messages="$errors->get('address')" class="mt-2" />
         </div>
 
         <div class="flex items-center justify-end mt-4">
